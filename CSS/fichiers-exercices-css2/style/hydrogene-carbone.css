@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+div.atome {
+/* décommentez pour utiliser ces valeurs suggérées */
+/*
+    width : 60px;
+    height : 80px;
+    margin : 1px 1px;    
+    background-color : rgb(128,128,255);
+*/
+}
+
+
+div.atome div.numero {
+    font-size : 16px;
+    font-weight : bold;
+}
+
+div.atome div.electronegativite {
+    font-size : 9px;
+}
+
+div.atome div.coucheselectrons {
+    font-size : 8px;
+}
+
+div.atome div.symbole {
+    font-size: 36px;   
+    font-weight : bold;
+    font-family: sans-serif;
+	text-align:center;
+}
+
+div.atome div.nom {
+    font-style : italic;
+    font-size : 10px;
+	text-align:center;
+}
+
+
+div.atome div.masseatomique {
+    font-size : 10px;
+    font-size : 8px;    
+}

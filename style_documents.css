@@ -1,0 +1,100 @@
+/* Styles pour les pages de documents */
+
+
+main img {
+    height: auto;
+    margin-top: 0.2rem;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+
+main h2 {
+    color: var(--primary-color);
+    margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+    border-bottom: 2px dashed var(--accent-color);
+}
+
+/* Table styles */
+table {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 2rem auto;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: #eae5e5;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+.flex{
+    display: flex;
+justify-content:space-between ;   
+ flex-wrap: nowrap;
+}
+/* Footer styles spécifiques aux documents */
+main footer {
+    margin-top: 3rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    text-align: center;
+}
+
+main footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+main footer a:hover {
+    color: var(--accent-color);
+}
+
+@media screen and (max-width: 750px) {
+    main {
+        padding: 1rem;
+    }
+    .flex{
+        flex-wrap: wrap;
+    }
+    main img{
+        max-width: 100%;
+    }
+   
+
+    
+    table {
+        font-size: 0.9rem;
+
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+
+   
+
+    th, td {
+        padding: 0.5rem;
+    }
+}

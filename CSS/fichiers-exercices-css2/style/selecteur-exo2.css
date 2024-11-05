@@ -1,0 +1,79 @@
+
+span { /* 1 */
+	//background-color : yellow;
+}
+
+ul li span { /* 2 */
+	//background-color : green;
+}
+
+li span { /* 3 */
+	//background-color : pink;
+}
+
+p span + span { /* 4 */
+	//background-color : red;
+}
+
+p span { /* 5 */
+	//background-color : lightblue;
+}
+
+div div span { /* 6 */
+    //background-color : brown;
+}
+
+div.groupe span {/* 7 */
+    //background-color : lightgray;
+}
+
+div.groupe .exemple span { /* 8 */
+    //background-color : brown;
+} 
+
+p em+span { /* 9 */
+    //background-color : gold;
+}
+
+
+
+/*
+      div.groupe p span {
+         background-color : orange;
+      }
+
+
+      p span:first-child {  
+        background-color : black;
+        color : white;
+      }
+
+
+      p:nth-child(2) span {
+        background-color : black;
+        color : white;
+      }  
+
+      p:nth-of-type(2) span {
+        background-color : blue;
+        color : white;
+      }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

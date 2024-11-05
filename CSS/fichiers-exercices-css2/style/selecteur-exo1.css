@@ -1,0 +1,36 @@
+/* regle 1 */
+p {
+    padding : 10px;
+    background-color:pink;
+}
+
+/* regle 2 */
+h1+p {
+    background-color : red;
+}
+
+/* regle 3 */
+div>p {
+   background-color : yellow;
+}
+
+
+/* regle 4 */
+p[lang=en] {
+    background-color : green;
+}
+
+/* regle 5 */
+p.bleu {
+    background-color: lightblue;
+}
+
+/* regle 6 */
+p#special {
+    background-color: gold;
+}
+
+/* regle 7 */
+p+p {
+    background-color: lightgreen;
+}

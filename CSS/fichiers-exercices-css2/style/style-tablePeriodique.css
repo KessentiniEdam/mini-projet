@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+div#tablePeriodique {
+    width : 1000px;
+    margin : auto;
+    background-color : rgb(255,255,128);
+    padding : 0.5%;
+}
+
+#etc {
+    font-size : 40px;
+}
+

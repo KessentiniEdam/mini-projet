@@ -1,143 +1,136 @@
-const loginBox = document.querySelector(".login-box")
-const currentUser = JSON.parse(window.localStorage.getItem("current-user"))
-if(currentUser.username) 
-loginBox.innerHTML = `
+const loginBox = document.querySelector(".login-box");
+const currentUser = JSON.parse(window.localStorage.getItem("current-user"));
+if (currentUser?.username)
+  loginBox.innerHTML = `
 <img src="ena.jpg"  ></img>
 <p>${currentUser.username}</p>
 `;
 
+let lavageTable = document.querySelector("#lavageTable");
+console.log(lavageTable);
 
-let lavageTable = document.querySelector("#lavageTable")   
- console.log(lavageTable);
+let table = document.querySelector(".reparationTable");
 
-let reparationTable = document.querySelector(".reparationTable")
-
-// OR Option 2: Move the script tag to just before the closing </body> tag
-
-let api = `https://v6.exchangerate-api.com/v6/3bc2f59d17b9d8d4a1b80512/latest/USD`;
+let api = `https://v6.exchangerate-api.com/v6/3bc2f59d17b9d8d4a1b80512/latest/:currency`;
 const toDropDown = document.getElementById("to-currency-select");
-const currencies = ["TND","USD","EUR"]; 
+const currencies = ["TND", "USD", "EUR"];
+
+const devise = localStorage.getItem("devise") || "TND";
 
 currencies.forEach((currency) => {
-    const option = document.createElement("option");
-    option.value = currency;
-    option.text = currency;
-    toDropDown.add(option);
-
-  });
- 
-toDropDown.addEventListener("change", () => {
-    localStorage.setItem("devise", toDropDown.value);
+  const option = document.createElement("option");
+  option.value = currency;
+  option.text = currency;
+  toDropDown.add(option);
 });
-//toDropDown.value=localStorage.getItem("devise");
-  /////
- 
 
-fetch(api)
-  .then((resp) => resp.json())
-  .then((data) => {
-          let fromExchangeRate = data.conversion_rates["TND"];
-          let toExchangeRate = data.conversion_rates[localStorage.getItem("devise")];
+toDropDown.addEventListener("change", () => {
+  localStorage.setItem("devise", toDropDown.value);
+  getCurrentExchangeRate(toDropDown.value);
+});
 
+toDropDown.value = devise;
 
+const getCurrentExchangeRate = async (newDevise) => {
+  const res = await fetch(api.replace(":currency", newDevise || devise));
+  const data = await res.json();
+  let fromExchangeRate = data.conversion_rates["TND"];
+  rerenderTableContent(fromExchangeRate, newDevise || devise);
+  return fromExchangeRate;
+};
 
-          function convertirPrix(table, prixColumnIndex) {
-            const rows = table.querySelectorAll("tr");
-        
-            rows.forEach((row) => {
-                // Ignorer les lignes contenant des cellules <th> (l'en-tête)
-                if (row.querySelector("th")) return;
-        
-                // Sélectionner la cellule de la colonne des prix
-                const prixCell = row.querySelector(`td:nth-of-type(${prixColumnIndex})`);
-                if (prixCell) {
-                    // Extraire le prix, enlever " TND" ou " dt", et convertir en nombre
-                    const prixEnTND = parseFloat(prixCell.textContent.replace(/[^\d.]/g, ''));
-                    const prix = ((prixEnTND / fromExchangeRate) * toExchangeRate).toFixed(2);
-        
-        
-                    // Mettre à jour le contenu de la cellule avec le prix en USD
-                    prixCell.innerHTML = `${prix} ${localStorage.getItem("devise")}`;
-                }
-            });
-        }
-        
-        convertirPrix(reparationTable,2)
-        convertirPrix(lavageTable,3)
-        }); 
-      
-        
-         // result.innerHTML = ` ${convertedAmount.toFixed(2)} ${localStorage.getItem("devise")}`;
- 
-  
-  
-  
-
-
-/*
-const tableContent = [
+const rerenderTableContent = (changeTo, currency) => {
+  const tableContent = [
     {
-        name : "Changement d'huile",
-        amount : 150
-    }
-    ,
-    {
-        name : "réparation des freins",
-        amount : 500
-    }
-    ,
-    {
-        name : "Entretien du système de climatisation",
-        amount : 200
-    }
-    ,
-    {
-        name : "Remplacement de la batterie",
-        amount : 250
-    }
-    ,
-    {
-        name : "Réglage du moteur",
-        amount : 400
-    }
-    ,
-    {
-        name : "Changement des filtres",
-        amount : 100
-    }
-    , {
-        name : "Alignement des roues",
-        amount : 120
-    }
-    ,
-    {
-        name : "Diagnostic électronique",
-        amount : 300
-    }
-    ,
-    {
-        name : "Réparation du système d'échappement",
-        amount : 350
-    }
-    ,
-    {
-        name : "changement de courroie",
-        amount : 180
+      name: "Changement d'huile",
+      amount: 150 * changeTo,
     },
     {
-        name : "Réparation de la transmission",
-        amount : 600
+      name: "réparation des freins",
+      amount: 500 * changeTo,
     },
     {
-        name : "Nettoyage et entretien des injecteurs",
-        amount : 220
+      name: "Entretien du système de climatisation",
+      amount: 200 * changeTo,
     },
-]
-let tableHtml=''
- tableContent.forEach((ele)=>{
-    tableHtml+=  `<tr>
-<td>${ele.name}</td>
-<td>${ele.amount}</td></tr>`
-})
-table.innerHTML = tableHtml
-*/
+    {
+      name: "Remplacement de la batterie",
+      amount: 250 * changeTo,
+    },
+    {
+      name: "Réglage du moteur",
+      amount: 400 * changeTo,
+    },
+    {
+      name: "Changement des filtres",
+      amount: 100 * changeTo,
+    },
+    {
+      name: "Alignement des roues",
+      amount: 120 * changeTo,
+    },
+    {
+      name: "Diagnostic électronique",
+      amount: 300 * changeTo,
+    },
+    {
+      name: "Réparation du système d'échappement",
+      amount: 350 * changeTo,
+    },
+    {
+      name: "changement de courroie",
+      amount: 180 * changeTo,
+    },
+    {
+      name: "Réparation de la transmission",
+      amount: 600 * changeTo,
+    },
+    {
+      name: "Nettoyage et entretien des injecteurs",
+      amount: 220 * changeTo,
+    },
+  ];
+  const lavageTableContent = [
+    {
+      name: "Lavage à la main",
+      description: "Précis et doux pour la peinture",
+      amount: 30,
+    },
+    {
+      name: "Lavage automatique",
+      description: "Rapide et pratique",
+      amount: 20,
+    },
+  ];
+
+  let tableHtml = "";
+  let lavageTableHtml = "";
+
+  tableContent.forEach((ele) => {
+    tableHtml += `<tr>
+  <td>${ele.name}</td>
+  <td>${ele.amount.toFixed(2)} ${currency}</td></tr>`;
+  });
+
+  lavageTableContent.forEach((ele) => {
+    lavageTableHtml += `<tr>
+  <td>${ele.name}</td>
+  <td>${ele.description}</td>
+  <td>${ele.amount.toFixed(2)} ${currency}</td></tr>`;
+  });
+
+  if (table)
+    table.innerHTML = `<tr>
+  <th>Service</th>
+  <th>Coût</th>
+</tr>${tableHtml}`;
+
+  if (lavageTable)
+    lavageTable.innerHTML = `   <tr>
+  <th>Méthode</th>
+  <th>Avantages</th>
+  <th>Prix</th>
+</tr>
+  ${lavageTableHtml}`;
+};
+getCurrentExchangeRate();

@@ -67,8 +67,9 @@ a{
 
 .nav-link {
     color: var(--white);
+    height: 50px;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     transition: color 0.3s ease;
 }
 
@@ -209,9 +210,22 @@ body {
 .login-box img{
     width: 2.5rem;
     aspect-ratio: 1;
+    margin-top: -0px;
     border-radius: 50%;
 }
 .login-box p{
     color: white;
     font-size: 0.8rem;
+}
+
+#to-currency-select{
+    background-color:   var(--accent-color);
+    border-color:     var(--white);
+font-size: 12px;
+    width: 3rem;
+height:3rem ;
+    text-align: center; 
+   border-radius: 50%;
+    color: var(--white);
+
 }

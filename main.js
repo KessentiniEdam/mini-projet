@@ -94,12 +94,12 @@ const rerenderTableContent = (changeTo, currency) => {
     {
       name: "Lavage à la main",
       description: "Précis et doux pour la peinture",
-      amount: 30,
+      amount: 30 * changeTo,
     },
     {
       name: "Lavage automatique",
       description: "Rapide et pratique",
-      amount: 20,
+      amount: 20 * changeTo,
     },
   ];
 
